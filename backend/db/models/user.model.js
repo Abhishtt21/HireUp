@@ -26,7 +26,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true,"Please provide your password"],
         minLength:[8,"Password must contain atleast 8 characters"],
-        maxLength:[32,"Password cannot exceed 32 Characters"]
+        maxLength:[32,"Password cannot exceed 32 Characters"],
+        select: false
 
     },
     role:{
@@ -53,7 +54,7 @@ userSchema.methods.comparePassword = async function (enteredPassword){
 }
 
 userSchema.methods.getJWTToken = function(){
-    return jwt.sign({id: this._id},process.env.JWT_SECRET,{
+    return jwt.sign({id: this._id},process.env.JWT_SECRET_KEY,{
         expiresIn: process.env.JWT_EXP
     })
 }
