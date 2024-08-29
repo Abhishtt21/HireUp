@@ -56,3 +56,11 @@ export const logout = asyncError (async (req,res,next)=>{
         message:"Logged Out"
     });
 })
+
+export const getUser = asyncError((req, res, next) => {
+    const user = req.user;
+    res.status(200).json({
+      success: true,
+      user,
+    });
+  });
